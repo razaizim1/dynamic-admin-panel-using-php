@@ -14709,3 +14709,8 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
 .registration-body{
   margin-bottom: -30px;
 }
+.card-profile__info li{
+  display: flex ;
+  justify-content: space-between;
+  align-items: center;
+}

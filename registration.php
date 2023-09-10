@@ -1,5 +1,6 @@
 <?php
 require_once('config.php');
+session_start();
 
 
 if (isset($_POST['register_form'])) {
@@ -50,7 +51,19 @@ if (isset($_POST['register_form'])) {
         print_r($result);
 
         if ($result == true) {
+            // Success Message
             $success = 'Data inserted';
+
+            // Mail Message
+            $message = 'Your verification code is :' . $emailCode;
+            mail($email, 'Verification Code', $message);
+
+            // Create Session
+            $_SESSION['user_email'] = $email;
+            $_SESSION['user_mobile'] = $mobile;
+
+            // Redirection
+            header('location:verification.php');
         } else {
             $error = 'Error inserting';
         }

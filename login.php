@@ -16,21 +16,49 @@ if (isset($_POST['login_form'])) {
     } else {
         $password = sha1($password);
 
-        $stm = $connection->prepare('SELECT id,email,mobile,mobile_status,email_status,username,password FROM users WHERE username = ? AND password=?');
+        $stm = $connection->prepare('SELECT * FROM users WHERE username = ? AND password=?');
         $stm->execute(array($username, $password));
         $result = $stm->rowCount();
         echo $result;
 
         if ($result != 0) {
+            // Get all table
             $userData = $stm->fetch(PDO::FETCH_ASSOC);
             print_r($userData);
 
             if ($userData['email_status'] == 1 and $userData['mobile_status'] == 1) {
+                // Update verification codes and status
+                $stm = $connection->prepare('UPDATE users SET email_code = ?,mobile_code =?,status=? WHERE email=?');
+                $stm->execute(array('null', 'null', 'verified', $userData['email']));
+
+                // create a session
+                $_SESSION['user'] = $userData;
+
+                // Redirection
                 header('location:index.php');
             } else {
-                $_SESSION['user'] = $userData;
+
+                // Generate random verification code again
+                $getEmailCode = rand(11111, 99999);
+                $getMobileCode = rand(11111, 99999);
+
+                // Update verificatio codes
+                $stm = $connection->prepare('UPDATE users SET email_code = ?,mobile_code =? WHERE email=?');
+                $stm->execute(array($getEmailCode, $getMobileCode, $userData['email']));
+
+                // Mail Message
+                $message = 'Your verification code is :' . $emailCode;
+                mail($userData['email'], 'Verification Code', $message);
+
+
+                $_SESSION['user_id'] = $userData['id'];
+                $_SESSION['user_email'] = $userData['email'];
+                $_SESSION['user_mobile'] = $userData['mobile'];
+
                 header('location:verification.php');
             }
+        } else {
+            $error = 'Invalid password';
         }
     }
 

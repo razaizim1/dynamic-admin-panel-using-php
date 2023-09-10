@@ -9,12 +9,12 @@ function InputCount($col, $value)
     return $count;
 }
 
-// function getAdmin($id,$col){
-//     global $connection;
-//     $stm=$connection->prepare("SELECT $col FROM admins WHERE id=?");
-//     $stm->execute(array($id));
-//     $result=$stm->fetch(PDO::FETCH_ASSOC);
-//     return $result[$col];
-// }
-
-
+// Get userdata
+function userdata($id)
+{
+    global $connection;
+    $stm = $connection->prepare('SELECT name,username,mobile,business_name,address,gender,date_of_birth,status,photos FROM users WHERE id=?');
+    $stm->execute(array($id));
+    $userData = $stm->fetch(PDO::FETCH_ASSOC);
+    return $userData;
+}
