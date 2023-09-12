@@ -58,7 +58,7 @@ if (isset($_POST['login_form'])) {
                 header('location:verification.php');
             }
         } else {
-            $error = 'Invalid password';
+            $error = 'Invalid username or password';
         }
     }
 

@@ -1,36 +1,24 @@
 <?php
-require_once('header.php');
+require_once('../config.php');
+get_header();
 $getData = $_SESSION['user']['id'];
 
 ?>
-<div class="content-body">
-
-    <div class="row page-titles mx-0">
-        <div class="col p-md-0">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
-            </ol>
-        </div>
-    </div>
-    <!-- row -->
-
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-5 col-xl-5">
                 <div class="card">
                     <div class="card-body">
+                        <?php $userData = userdata($getData); ?>
                         <div class="media align-items-center mb-4">
-                            <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
+                            <?php if ($userData['photo'] != NULL): ?>
+                                <img class="mr-3" src="../images/avatar/<?php echo $userData['photo']; ?>" width="80"
+                                    height="80" alt="">
+                            <?php else: ?>
+                                <img class="mr-3" src="../images/avatar/11.png" width="80" height="80" alt="">
+                            <?php endif; ?>
                             <div class="media-body">
 
-                                <?php
-                                // $stm = $connection->prepare('SELECT name,username,mobile,business_name,address,gender,date_of_birth,status FROM users WHERE id=?');
-                                // $stm->execute(array($_SESSION['user']['id']));
-                                // $userData = $stm->fetch(PDO::FETCH_ASSOC);
-                                // print_r($userData);
-                                $userData = userdata($getData);
-                                ; ?>
                                 <h3 class="mb-0">
                                     <?php echo $userData['name']; ?>
                                 </h3>
@@ -76,17 +64,31 @@ $getData = $_SESSION['user']['id'];
                                     <?php echo $userData['date_of_birth']; ?>
                                 </span></li>
                             <li><strong class="text-dark mr-4">Status</strong>
-                                <div class="badge badge-success text-white">
-                                    <?php echo $userData['status']; ?>
+                                <div>
+                                    <?php if ($userData['status'] == 'verified'): ?>
+                                        <div class="badge bg-success text-white">
+                                            <?php echo 'Active' ?>
+                                        </div>
+                                    <?php elseif ($userData['status'] == 'pending'): ?>
+                                        <div class="badge bg-warning text-white">
+                                            <?php echo 'Pending'; ?>
+                                        </div>
+                                    <?php elseif ($userData['status'] == 'blocked'): ?>
+                                        <div class="badge bg-danger text-white">
+                                            <?php echo 'Blocked'; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </li>
                         </ul>
                         <div class="col-12 text-center">
-                            <button class="btn btn-danger px-5">Update Profile</button>
+                            <a href="<?php APP_URL(); ?>/dashboard/update-profile.php"><button
+                                    class="btn btn-danger px-5">Update Profile</button></a>
                         </div>
                         <br>
                         <div class="col-12 text-center">
-                            <button class="btn btn-warning px-5 text-white">Change Password</button>
+                            <a href="change-password.php"><button class="btn btn-warning px-5 text-white">Change
+                                    Password</button></a>
                         </div>
                     </div>
                 </div>
@@ -98,4 +100,4 @@ $getData = $_SESSION['user']['id'];
 <!--**********************************
             Content body end
         ***********************************-->
-<?php require_once('footer.php'); ?>
+<?php get_footer(); ?>

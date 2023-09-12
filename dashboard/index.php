@@ -1,6 +1,8 @@
-<?php require_once('header.php'); ?>
+<?php
+require_once('../config.php');
+require_once('../includes/header.php');
+?>
 
-<div class="content-body">
     <div class="container-fluid mt-3">
         <div class="row">
             <div class="col-lg-3 col-sm-6">
@@ -576,4 +578,4 @@
     ***********************************-->
 
 
-<?php require_once('footer.php'); ?>
+<?php require_once('../includes/footer.php'); ?>
