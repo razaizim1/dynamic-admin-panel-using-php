@@ -35,7 +35,7 @@ if (isset($_POST['login_form'])) {
                 $_SESSION['user'] = $userData;
 
                 // Redirection
-                header('location:index.php');
+                header('location:'.GET_APP_URL().'/dashboard/index.php');
             } else {
 
                 // Generate random verification code again
@@ -64,7 +64,7 @@ if (isset($_POST['login_form'])) {
 
 }
 if (isset($_SESSION['user'])) {
-    header('location:index.php');
+    header('location:'.GET_APP_URL().'/dashboard/index.php');
 }
 
 ; ?>

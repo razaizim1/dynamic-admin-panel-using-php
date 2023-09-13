@@ -1,5 +1,7 @@
 <?php
 // session_start();
+
+// User input data count
 function InputCount($col, $value)
 {
     global $connection;
@@ -40,17 +42,17 @@ function GetTableData($tbl)
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
-// Get Table Data
-function GetCatData($tbl, $value)
+// Get Table Single Data
+function GetSingleData($tbl, $value)
 {
     global $connection;
-    $stm = $connection->prepare("SELECT * FROM $tbl WHERE id=?");
-    $stm->execute(array($value));
+    $stm = $connection->prepare("SELECT * FROM $tbl WHERE user_id=? AND id=?");
+    $stm->execute(array($_SESSION['user']['id'], $value));
     $result = $stm->fetch(PDO::FETCH_ASSOC);
     return $result;
 }
 
-// Delete Table Data 
+// Delete Table Data
 function DeleteTableData($tbl, $id)
 {
     global $connection;

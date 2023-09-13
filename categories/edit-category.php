@@ -2,9 +2,10 @@
 require_once('../config.php');
 get_header();
 $category = GetTableData('categories');
+// Get id from link
 $id = $_REQUEST['id'];
-echo $id;
-$catData = GetCatData('categories', $id);
+// Get category single data
+$catData = GetSingleData('categories', $id);
 
 if (isset($_POST['edit_category'])) {
     $cat_name = $_POST['cat_name'];
@@ -12,21 +13,27 @@ if (isset($_POST['edit_category'])) {
     $getCatSlug = tblDataCount('category_slug', 'categories', $cat_slug);
     $pattern = "/^[a-z-0-9]+$/";
 
+    // Own category slug count
+    $stm = $connection->prepare('SELECT category_slug FROM categories WHERE category_slug =? AND id=?');
+    $stm->execute(array($cat_slug, $id));
+    $ownSlugCount = $stm->rowCount();
 
 
     if (empty($cat_name)) {
         $error = 'Name is required';
     } elseif (empty($cat_slug)) {
         $error = 'Slug is required';
-    } elseif ($getCatSlug != 0) {
+    } elseif ($getCatSlug != 0 and $ownSlugCount != 1) {
         $error = 'Slug already exists';
     } elseif (!preg_match($pattern, $cat_slug)) {
         $error = "Don't use any special and upperchase characters and white space";
     } else {
 
-        $stm = $connection->prepare('UPDATE categories SET category_name = ?,category_slug =? WHERE id=?');
-        $stm->execute(array($cat_name, $cat_slug, $id));
+        // Category update
+        $stm = $connection->prepare('UPDATE categories SET category_name = ?,category_slug =? WHERE user_id=? AND id=?');
+        $stm->execute(array($cat_name, $cat_slug, $_SESSION['user']['id'], $id));
 
+        // Success message
         $success = 'Category Update Successfully';
     }
 }
@@ -34,7 +41,6 @@ if (isset($_POST['edit_category'])) {
 ?>
 <div class="container-fluid">
     <div class="row">
-
         <div class="col-lg-8 mx-auto">
             <div class="card">
                 <div class="card-body">

@@ -21,7 +21,7 @@ if (isset($_POST['create_category'])) {
         $now = date('Y-m-d H:i:s');
 
         $stm = $connection->prepare('INSERT INTO categories (user_id,category_name,category_slug,created_at) VALUES(?,?,?,?)');
-        $stm->execute(array($user_id, $cat_name, $cat_slug, $now));
+        $stm->execute(array($user_id, ucwords($cat_name), $cat_slug, $now));
         $success = 'Category created successfully';
     }
 }

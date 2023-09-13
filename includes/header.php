@@ -28,6 +28,8 @@ $userData = $_SESSION['user'];
     <!-- Chartist -->
     <link rel="stylesheet" href="../plugins/chartist/css/chartist.min.css">
     <link rel="stylesheet" href="../plugins/chartist-plugin-tooltips/css/chartist-plugin-tooltip.css">
+    <link href="../plugins/summernote/dist/summernote.css" rel="stylesheet">
+
     <!-- Custom Stylesheet -->
     <link href="../css/style.css" rel="stylesheet">
 
@@ -167,7 +169,7 @@ $userData = $_SESSION['user'];
                                                     class="icon-lock"></i> <span>Change
                                                     password</span></a>
                                         </li>
-                                        <li><a href="<?php APP_URL(); ?>/dashboard/logout.php"><i class="icon-key"></i>
+                                        <li><a href="<?php APP_URL(); ?>/logout.php"><i class="icon-key"></i>
                                                 <span>Logout</span></a>
                                         </li>
                                     </ul>
@@ -204,7 +206,7 @@ $userData = $_SESSION['user'];
                         </a>
                         <ul aria-expanded="false">
                             <li><a href="<?php APP_URL(); ?>/categories/add-new.php">Add New</a></li>
-                            <li><a href="<?php APP_URL(); ?>/categories/categories.php">All Categories</a></li>
+                            <li><a href="<?php APP_URL(); ?>/categories">All Categories</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
@@ -212,8 +214,8 @@ $userData = $_SESSION['user'];
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Products</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?php APP_URL(); ?>/add-new-product.php">Add New</a></li>
-                            <li><a href="<?php APP_URL(); ?>/products.php">All Products</a></li>
+                            <li><a href="<?php APP_URL(); ?>/products/add-new.php">Add New</a></li>
+                            <li><a href="<?php APP_URL(); ?>/products/index.php">All Products</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Manufacture</li>
