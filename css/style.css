@@ -14714,3 +14714,13 @@ html[dir="rtl"] [direction="rtl"][data-sidebar-style="compact"]:not([data-layout
   justify-content: space-between;
   align-items: center;
 }
+
+.profile img{
+  object-fit: cover;
+}
+
+.products table tbody tr td img{
+  height: 50px;
+  object-fit: cover;
+  width: auto;
+}

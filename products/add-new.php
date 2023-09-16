@@ -25,6 +25,7 @@ if (isset($_POST['create_product'])) {
     } elseif ($photoFileType != 'jpg' && $photoFileType != 'png' && $photoFileType != 'jpeg') {
         $error = 'Photo must be JPG or PNG or JPEG';
     } else {
+
         $now = date('Y-m-d H:i:s');
         $photoName = $user_id . '-' . rand(1111, 9999) . '-' . time() . '.' . $photoFileType;
         move_uploaded_file($_FILES["photo"]["tmp_name"], $target_dir . $photoName);
@@ -32,6 +33,7 @@ if (isset($_POST['create_product'])) {
         $stm = $connection->prepare('INSERT INTO products (user_id,product_name,product_category,product_description,photo,created_at) VALUES(?,?,?,?,?,?)');
         $stm->execute(array($user_id, $product_name, $product_category, $product_description, $photoName, $now));
         $success = 'Product created successfully';
+
     }
 }
 

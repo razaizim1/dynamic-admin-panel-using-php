@@ -23,6 +23,8 @@ function tblDataCount($col, $tbl, $value)
     return $count;
 }
 
+
+
 // Get userdata
 function userdata($id)
 {
@@ -59,6 +61,26 @@ function DeleteTableData($tbl, $id)
     $stm = $connection->prepare("DELETE FROM $tbl WHERE user_id=? AND id=?");
     $delete = $stm->execute(array($_SESSION['user']['id'], $id));
     return $delete;
+}
+
+// // Get Product Category Name
+// function getProductCategoryName($col, $id)
+// {
+//     global $connection;
+//     $stm = $connection->prepare("SELECT $col FROM categories WHERE id=?");
+//     $stm->execute(array($id));
+//     $result = $stm->fetch(PDO::FETCH_ASSOC);
+//     return $result[$col];
+// }
+
+// Table specific data
+function tblSingleData($col, $tbl, $id)
+{
+    global $connection;
+    $stm = $connection->prepare("SELECT $col FROM $tbl WHERE id=?");
+    $stm->execute(array($id));
+    $data = $stm->fetch(PDO::FETCH_ASSOC);
+    return $data;
 }
 
 // App Url

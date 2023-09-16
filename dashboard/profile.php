@@ -10,9 +10,9 @@ $getData = $_SESSION['user']['id'];
                 <div class="card">
                     <div class="card-body">
                         <?php $userData = userdata($getData); ?>
-                        <div class="media align-items-center mb-4">
+                        <div class="media align-items-center mb-4 profile">
                             <?php if ($userData['photo'] != NULL): ?>
-                                <img class="mr-3" src="../images/avatar/<?php echo $userData['photo']; ?>" width="80"
+                                <img class="mr-3" src="../uploads/profile/<?php echo $userData['photo']; ?>" width="80"
                                     height="80" alt="">
                             <?php else: ?>
                                 <img class="mr-3" src="../images/avatar/11.png" width="80" height="80" alt="">

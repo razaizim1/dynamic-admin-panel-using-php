@@ -147,10 +147,10 @@ $userData = $_SESSION['user'];
                             </div>
                         </li>
                         <li class="icons dropdown">
-                            <div class="user-img c-pointer position-relative" data-toggle="dropdown">
+                            <div class="user-img c-pointer position-relative profile" data-toggle="dropdown">
                                 <span class="activity active"></span>
                                 <?php if ($userData['photo'] != NULL): ?>
-                                    <img src="../images/avatar/<?php echo $userData['photo']; ?>" width="40" height="40"
+                                    <img src="../uploads/profile/<?php echo $userData['photo']; ?>" width="40" height="40"
                                         alt="">
                                 <?php else: ?>
                                     <img src="../images/avatar/11.png" width="40" height="40" alt="">
@@ -224,8 +224,8 @@ $userData = $_SESSION['user'];
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Manufacture</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?php APP_URL(); ?>/add-new-manufacture.php">Add New</a></li>
-                            <li><a href="<?php APP_URL(); ?>/manufactures.php">All Manufactures</a></li>
+                            <li><a href="<?php APP_URL(); ?>/manufactures/add-new.php">Add New</a></li>
+                            <li><a href="<?php APP_URL(); ?>/manufactures">All Manufactures</a></li>
                         </ul>
                     </li>
                     <li class="mega-menu mega-menu-sm">
