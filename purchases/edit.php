@@ -14,8 +14,6 @@ if (isset($_POST['edit_product'])) {
 
     if (empty($prodcut_name)) {
         $error = 'Name is required';
-    } elseif (empty($product_description)) {
-        $error = 'Description is required';
     } else {
 
         // Category update
@@ -51,12 +49,12 @@ if (isset($_POST['edit_product'])) {
                                 <?php endif; ?>
 
                                 <?php
-                                $products = GetProductsData($id);
+                                $products = GetTableData('products');
                                 ; ?>
 
                                 <label>Product Name</label>
                                 <input type="text" class="form-control" name="prodcut_name"
-                                    value="<?php echo $products['product_name']; ?>" placeholder="Product Name">
+                                    value="<?php echo $products[0]['product_name']; ?>" placeholder="Product Name">
                             </div>
                             <div class="form-group col-md-8 mx-auto">
                                 <label for="prodcut_category">Product Category:</label>
@@ -66,9 +64,8 @@ if (isset($_POST['edit_product'])) {
                                     $categories = GetTableData('categories');
                                     foreach ($products as $product):
                                         ; ?>
-                                        <option value="<?php echo $products['product_category']; ?>">
-                                            <?php $category = tblSingleData('category_name', 'categories', $products['product_category']);
-                                            echo $category['category_name']; ?>
+                                        <option value="<?php echo $products[0]['product_category']; ?>"><?php $category = tblSingleData('category_name', 'categories', $products[0]['product_category']);
+                                           echo $category['category_name']; ?>
                                         </option>
                                     <?php endforeach; ?>
                                 </select>

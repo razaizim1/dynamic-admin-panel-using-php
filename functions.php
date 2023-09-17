@@ -1,5 +1,4 @@
 <?php
-// session_start();
 
 // User input data count
 function InputCount($col, $value)
@@ -8,7 +7,6 @@ function InputCount($col, $value)
     $stm = $connection->prepare("SELECT $col FROM users WHERE $col=?");
     $stm->execute(array($value));
     $count = $stm->rowCount();
-
     return $count;
 }
 
@@ -19,11 +17,8 @@ function tblDataCount($col, $tbl, $value)
     $stm = $connection->prepare("SELECT $col FROM $tbl WHERE $col=?");
     $stm->execute(array($value));
     $count = $stm->rowCount();
-
     return $count;
 }
-
-
 
 // Get userdata
 function userdata($id)
@@ -44,6 +39,24 @@ function GetTableData($tbl)
     $result = $stm->fetchAll(PDO::FETCH_ASSOC);
     return $result;
 }
+// Get product name
+function GetProductsData($col, $id)
+{
+    global $connection;
+    $stm = $connection->prepare("SELECT $col FROM products WHERE id=?");
+    $stm->execute(array($id));
+    $result = $stm->fetch(PDO::FETCH_ASSOC);
+    return $result[$col];
+}
+// Get manufacture name
+function GetManufacturesData($col, $id)
+{
+    global $connection;
+    $stm = $connection->prepare("SELECT $col FROM manufactures WHERE id=?");
+    $stm->execute(array($id));
+    $result = $stm->fetch(PDO::FETCH_ASSOC);
+    return $result[$col];
+}
 // Get Table Single Data
 function GetSingleData($tbl, $value)
 {
@@ -62,16 +75,6 @@ function DeleteTableData($tbl, $id)
     $delete = $stm->execute(array($_SESSION['user']['id'], $id));
     return $delete;
 }
-
-// // Get Product Category Name
-// function getProductCategoryName($col, $id)
-// {
-//     global $connection;
-//     $stm = $connection->prepare("SELECT $col FROM categories WHERE id=?");
-//     $stm->execute(array($id));
-//     $result = $stm->fetch(PDO::FETCH_ASSOC);
-//     return $result[$col];
-// }
 
 // Table specific data
 function tblSingleData($col, $tbl, $id)

@@ -8,9 +8,10 @@ if (isset($_POST['create_category'])) {
     $manufacture_address = $_POST['manufacture_address'];
     $manufacture_mobile = $_POST['manufacture_mobile'];
 
-    $stm = $connection->prepare("SELECT mobile FROM manufactures WHERE user_id=?");
-    $stm->execute(array($_SESSION['user']['id']));
+    $stm = $connection->prepare("SELECT mobile FROM manufactures WHERE mobile=?");
+    $stm->execute(array($manufacture_mobile));
     $mboileCount = $stm->rowCount();
+    echo $mboileCount;
 
     if (empty($manufacture_name)) {
         $error = 'Name is required';
@@ -22,7 +23,7 @@ if (isset($_POST['create_category'])) {
         $error = 'Mobile number must be a number';
     } elseif (strlen($manufacture_mobile) != 11) {
         $error = 'Mobile number must be 11 digits';
-    } elseif ($mboileCount != 0) {
+    } elseif ($mboileCount == 1) {
         $error = 'Mobile number already exists';
     } else {
         $now = date('Y-m-d H:i:s');

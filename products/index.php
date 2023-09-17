@@ -8,7 +8,7 @@ get_header();
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">All Categories</h4>
+                    <h4 class="card-title">All Products</h4>
                     <?php if (isset($_REQUEST['success'])): ?>
                         <div class="alert alert-success">
                             <?php echo $_REQUEST['success']; ?>

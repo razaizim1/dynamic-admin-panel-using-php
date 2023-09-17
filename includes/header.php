@@ -233,8 +233,8 @@ $userData = $_SESSION['user'];
                             <i class="icon-globe-alt menu-icon"></i><span class="nav-text">Purchases</span>
                         </a>
                         <ul aria-expanded="false">
-                            <li><a href="<?php APP_URL(); ?>/add-new-purchase.php">Add New</a></li>
-                            <li><a href="<?php APP_URL(); ?>/purchases.php">All Purchases</a></li>
+                            <li><a href="<?php APP_URL(); ?>/purchases/add-new.php">Add New</a></li>
+                            <li><a href="<?php APP_URL(); ?>/purchases/">All Purchases</a></li>
                         </ul>
                     </li>
                     <li class="nav-label">Sale</li>
